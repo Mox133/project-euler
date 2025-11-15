@@ -15,35 +15,27 @@
 using namespace std;
 
 
-bool is_even (int number) {
-    return number % 2 == 0;
+bool is_even(int number) {
+    return (number & 1) == 0; // faster than %
 }
 
-int main(int argc, char* argv[]) {
-    cout << "Project Euler - Problem 2" << endl;
-    cout << "-------------------------" << endl;
+int main() {
+    const int limit = 4'000'000;
 
-    const int limit = 4000000;
+    long long sum = 0;
 
-    int sum = 0;
-    int prev_2 = 0;
-    int prev = 1;
-    int term = 1;
+    int prev2 = 1;
+    int prev1 = 2;
 
-    while (term <= limit) {
-        term = prev_2 + prev;
-        prev_2 = prev;
-        prev = term;
+    while (prev1 <= limit) {
+        if (is_even(prev1))
+            sum += prev1;
 
-        if (is_even(term)) {
-            sum += term;
-        }
-
-        cout << term << ", ";
+        int next = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = next;
     }
 
-    cout << endl << "Total sum of even terms: " << sum << endl;
-
-    return 0;
-}    
+    std::cout << "Total sum of even Fibonacci terms: " << sum << '\n';
+}
 

@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.10)
+project(project_euler LANGUAGES CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release)
+
+file(GLOB PROBLEM_DIRS RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/problem*)
+foreach(d IN LISTS PROBLEM_DIRS)
+  if(IS_DIRECTORY ${CMAKE_SOURCE_DIR}/${d})
+    add_subdirectory(${d})
+  endif()
+endforeach()

@@ -15,27 +15,21 @@
 using namespace std;
 
 
-bool is_even(int number) {
-    return (number & 1) == 0; // faster than %
-}
-
 int main() {
     const int limit = 4'000'000;
 
     long long sum = 0;
 
-    int prev2 = 1;
-    int prev1 = 2;
+    long long even_prev = 2;   // E1
+    long long even_prev2 = 0;  // E0
 
-    while (prev1 <= limit) {
-        if (is_even(prev1))
-            sum += prev1;
+    while (even_prev <= limit) {
+        sum += even_prev;
 
-        int next = prev1 + prev2;
-        prev2 = prev1;
-        prev1 = next;
+        long long next_even = 4 * even_prev + even_prev2;
+        even_prev2 = even_prev;
+        even_prev = next_even;
     }
 
-    std::cout << "Total sum of even Fibonacci terms: " << sum << '\n';
+    std::cout << "Total sum of even Fibonacci terms: " << sum << std::endl;
 }
-

@@ -10,21 +10,17 @@
 
 #include <iostream>
 
+long sum_of_multiples(int k, int limit) {
+    int p = (limit - 1) / k;
+    return static_cast<long>(k) * p * (p + 1) / 2;
+}
+
 int main() {
     const int limit = 1000;
-    long sum = 0;
 
-    // Add multiples of 3
-    for (int i = 3; i < limit; i += 3) {
-        sum += i;
-    }
-
-    // Add multiples of 5, skip multiples of 15 (already counted)
-    for (int i = 5; i < limit; i += 5) {
-        if (i % 3 != 0) {  // skip common multiples
-            sum += i;
-        }
-    }
+    long sum = sum_of_multiples(3, limit) 
+             + sum_of_multiples(5, limit) 
+             - sum_of_multiples(15, limit); // remove double-counted multiples
 
     std::cout << "Sum of all multiples of 3 or 5 below " << limit << ": " << sum << std::endl;
 }

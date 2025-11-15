@@ -12,8 +12,6 @@
 */
 
 #include <iostream>
-using namespace std;
-
 
 int main() {
     const int limit = 4'000'000;

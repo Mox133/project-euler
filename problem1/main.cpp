@@ -12,14 +12,19 @@
 
 int main() {
     const int limit = 1000;
+    long sum = 0;
 
-    long long sum = 0;
+    // Add multiples of 3
+    for (int i = 3; i < limit; i += 3) {
+        sum += i;
+    }
 
-    for(int i=1; i<limit; i++) {
-        if ((i % 3 == 0) || (i % 5 == 0)) {
+    // Add multiples of 5, skip multiples of 15 (already counted)
+    for (int i = 5; i < limit; i += 5) {
+        if (i % 3 != 0) {  // skip common multiples
             sum += i;
         }
     }
 
-    std::cout << "Sum of all the multiples of 3 or 5 below 1000: " << sum << std::endl;
+    std::cout << "Sum of all multiples of 3 or 5 below " << limit << ": " << sum << std::endl;
 }
